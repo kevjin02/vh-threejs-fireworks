@@ -68,7 +68,7 @@ renderer.setPixelRatio(sizes.pixelRatio);
 const texture = textureLoader.load("./particle.png");
 
 const createFirework = () => {
-  const count = Math.round(1000);
+  const count = 1000;
   const position = new THREE.Vector3();
   const size = 2;
   const radius = 2;
@@ -111,6 +111,15 @@ const createFirework = () => {
   const material = new THREE.ShaderMaterial({
     vertexShader: fireworkVertexShader,
     fragmentShader: fireworkFragmentShader,
+    uniforms: {
+      uSize: new THREE.Uniform(size),
+      uResolution: new THREE.Uniform(sizes.resolution),
+      uTexture: new THREE.Uniform(texture),
+      uColor: new THREE.Uniform(color),
+    },
+    transparent: true,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
   });
 
   // Points
